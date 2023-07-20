@@ -27,18 +27,37 @@ export function TransactionsProvider ({ children }: TransactionsProviderProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([])
 
   useEffect(() => {
-    api.get('transactions')
-      .then(response => setTransactions(response.data.transactions))
+    if (process.env.NODE_ENV === 'development') {
+      api.get('transactions')
+        .then(response => setTransactions(response.data.transactions))
+    } else {
+      const transactionsValue = JSON.parse(localStorage.getItem('transactions') || '[]')
+      if (transactionsValue) {
+        setTransactions(transactionsValue)
+      }
+    }
   }, [])
 
   async function createTransaction(transactionInput: TransactionInput) {
-    const response = await api.post('transactions', {
-      ...transactionInput,
-      createdAt: new Date(),
-    })
-    const { transaction } = response.data
+    let newTransaction: Transaction
+    if (process.env.NODE_ENV === 'development') {
+      const response = await api.post('transactions', {
+        ...transactionInput,
+        createdAt: new Date(),
+      })
 
-    setTransactions([...transactions, transaction])
+      const { transaction } = response.data
+      newTransaction = transaction
+    } else {
+      newTransaction = {
+        id: Math.random(),
+        createdAt: new Date().toString(),
+        ...transactionInput
+      }
+    }
+
+    setTransactions([...transactions, newTransaction])
+    localStorage.setItem('transactions', JSON.stringify([...transactions, newTransaction]))
   }
 
   return (

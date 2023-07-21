@@ -1,19 +1,20 @@
-# Ignite
+# DTMoney
 
-### [Chapter 02] - Create React App
+This is a simple web application built with React that allows you to track your incomes and expenses, providing you with a total financial result.
 
-**Subjects**
+## Demo
 
-  - Styled-Components
-  - MirageJs
-  - Axios
-  - Use components props to style it!
-  - React Contexts
-  - React Hooks
+You can view a live demo at [https://dtmoney-datsfilipe.vercel.app](https://dtmoney-datsfilipe.vercel.app).
 
+## Contributing
 
-**Running it**
+Contributions are welcome! If you find any bugs or want to enhance the application with new features, feel free to open an issue or submit a pull request.
 
-  - Clone the repo with `git clone`;
-  - After that, run `yarn` or `npm install` to install dependencies;
-  - And then run `yarn start` or `npm run start` to run the app at development mode.
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Commit your changes and push the branch to your fork.
+4. Submit a pull request to the main branch of the original repository.
+
+## License
+
+Open-source and distributed under the [MIT License](./LICENSE).
